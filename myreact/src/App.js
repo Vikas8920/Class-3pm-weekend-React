@@ -1,26 +1,30 @@
-import React, { Component } from 'react'
-import HelloWorld from './Component/HelloWorld'
-import Counter from './Component/Counter'
-import Logger from './Component/Logger'
-import Counter2 from './Component/Counter2'
+import React from 'react'
+import Button from './Component/Button'
+import Garage from './Component/Garage'
+import Football from './Component/Football'
+import Keypress from './Component/Keypress'
+import Garrage2 from './Component/Garrage2'
 
-export default class App extends Component {
-  render() {
-    return (
-      <>
-        <HelloWorld name={'Vikas'}/>
-        <HelloWorld name={'Sameer'}/>
-
-        <hr/>
-
-        <Counter/>
-        <hr/>
-        <Logger/>
-        <hr/>
-        <Counter2/>
-      </>
-    )
-  }
+const App = () => {
+  return (
+    <>
+      <Button text={'Submit'}/>
+      <br/>
+      <Button text={'Click'}/>
+      <br/>
+      <Button text={'Subscribe'}/>
+      <br/>
+      <Garage/>
+      <br/>
+      <Football/>
+      <br/>
+      <Keypress/>
+      <br/>
+      <Garrage2/>
+    </>
+  )
 }
+
+export default App
 
 
