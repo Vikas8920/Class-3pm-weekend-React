@@ -1,27 +1,26 @@
-import React from 'react'
-import './App.css'
+import React, { Component } from 'react'
+import HelloWorld from './Component/HelloWorld'
+import Counter from './Component/Counter'
+import Logger from './Component/Logger'
+import Counter2 from './Component/Counter2'
 
-// Today's Topic: React JSX, Fragment tag, conditional statements, Rules related to react
+export default class App extends Component {
+  render() {
+    return (
+      <>
+        <HelloWorld name={'Vikas'}/>
+        <HelloWorld name={'Sameer'}/>
 
-const App = () => {
-  const x = 5
-  // let text = 'Good bye'
-  // if(x<10){
-  //   text= 'Hello React'
-  // }
-  return (
-    <>
-      <h1>React is {5*5} times better with JSX</h1>
-      <h1>React is {5*5} times better with JSX</h1>
-      <h1>React is {5*5} times better with JSX</h1>
-      <h1>React is {5*5} times better with JSX</h1>
-      <input className='input' type='text'/>
-      <br/>
-      <hr/>
-      <h1>{(x)<10?'Hello React': 'Good bye'}</h1>
-    </>
-  )
+        <hr/>
+
+        <Counter/>
+        <hr/>
+        <Logger/>
+        <hr/>
+        <Counter2/>
+      </>
+    )
+  }
 }
 
-export default App
 
