@@ -1,30 +1,35 @@
-import React from 'react'
-import Button from './Component/Button'
-import Garage from './Component/Garage'
-import Football from './Component/Football'
-import Keypress from './Component/Keypress'
-import Garrage2 from './Component/Garrage2'
+import React, { useState } from 'react'
+import Form from './Component/Form'
+import MultipleInput from './Component/MultipleInput'
+import Select from './Component/Select'
+import Radio from './Component/Radio'
+import Checkbox from './Component/Checkbox'
+import Form2 from './Component/Form2'
+import Display from './Component/Display'
 
 const App = () => {
+  const [formData, setFormData] = useState(null)
+
+ const handleFormSubmit = (data) => {
+  setFormData(data)
+ } 
   return (
     <>
-      <Button text={'Submit'}/>
-      <br/>
-      <Button text={'Click'}/>
-      <br/>
-      <Button text={'Subscribe'}/>
-      <br/>
-      <Garage/>
-      <br/>
-      <Football/>
-      <br/>
-      <Keypress/>
-      <br/>
-      <Garrage2/>
+      <Form/>
+      <hr/>
+      <MultipleInput/>
+      <hr/>
+      <Select/>
+      <hr/>
+      <Radio/>
+      <hr/>
+      <Checkbox/>
+
+      <hr/>
+      <Form2 onFormSubmit={handleFormSubmit}/>
+      {formData && <Display data={formData}/>}
     </>
   )
 }
 
 export default App
-
-
