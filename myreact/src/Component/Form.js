@@ -1,23 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Login from './Login'
+import Registration from './Registration'
 
-const Form = () => {
-    const [name, setName] = useState('')
-
-    const handleSubmit = (e) =>{
-        e.preventDefault()
-        alert(`The name you entered is: ${name}`)
-        setName(e.target.value = '')
+const Form = ({form}) => {
+    if(form===true){
+        return (
+            <>
+              <Login/>
+            </>
+          )
+    }else{
+        return(
+            <Registration/>
+        )
     }
-
-  return (
-    <>
-      <form action='' method='post' onSubmit={handleSubmit}>
-        <label htmlFor='name'>Enter your name:</label>
-        <input type='text' value={name} id='name' onChange={(e)=>setName(e.target.value)}/>
-        <button type='submit'>Submit</button>
-      </form>
-    </>
-  )
+  
 }
 
 export default Form
