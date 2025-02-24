@@ -1,5 +1,24 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+nav{
+    background-color: black;
+}
+nav ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    padding: 10px;
+}
+nav ul li a{
+    text-decoration: none;
+    font-size: 25px;
+    color: white !important;
+}
 
-.input{
-    border: 2px solid red;
-    outline: none;
+h1{
+    text-align: center;
 }
