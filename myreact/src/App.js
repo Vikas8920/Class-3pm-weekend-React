@@ -1,27 +1,38 @@
 import React from 'react'
-import Navbar from './Component/Navbar'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from './Component/Home'
-import Blogs from './Component/Blogs'
-import Contact from './Component/Contact'
-
-import './App.css'
-import NoPage from './Component/NoPage'
-import ParentComponent from './Component/ParentComponent'
+import FavouriteColor from './Component/FavouriteColor'
+import Car from './Component/Car'
+import Timer from './Component/Timer'
+import Counter from './Component/Counter'
+import DisplayData from './Component/DisplayData'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import UserDetail from './Component/UserDetail'
 
 const App = () => {
   return (
     <>
-     <BrowserRouter>
-     <ParentComponent/>
-       <Navbar/>
+      <FavouriteColor/>
+      <hr/>
+      <Car/>
+      <hr/>
+      <Timer/>
+      <hr/>
+      <Counter/>
+      <hr/>
+      <DisplayData/>
+
+      <hr/>
+
+      <BrowserRouter>
+      <h1>Welcome to the user Information App</h1>
+      <ul>
+        <li><Link to='/user/1'>User 1</Link></li>
+        <li><Link to='/user/2'>User 2</Link></li>
+        <li><Link to='/user/3'>User 3</Link></li>
+      </ul>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/blogs' element={<Blogs/>}/>
-        <Route path='/contact' element={<Contact/>}/>
-        <Route path='*' element={<NoPage/>}/>
+        <Route path='/user/:userId' element={<UserDetail/>}/>
       </Routes>
-     </BrowserRouter>
+      </BrowserRouter>
     </>
   )
 }
