@@ -1,54 +1,71 @@
-import React, { useEffect, useRef, useState } from 'react'
-import Counter from './Component/Counter'
-import AuthProvider from './Component/AuthProvider'
-import Login from './Component/Login'
-import UserProfile from './Component/UserProfile'
-import ThemeProvider from './Component/ThemeProvider'
-import ThemeToggle from './Component/ThemeToggle'
-import CounterProvider from './Component/CounterProvider'
-import CounterDisplay from './Component/CounterDisplay'
+import React from 'react'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { CartProvider } from './Context/CartContext'
+import Navbar from './Component/Navbar'
+import ProductList from './Component/ProductList'
+import Cart from './Component/Cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { login, logout, toggleTheme } from './Component/actions'
 
 const App = () => {
-  const [inputValue, setInputValue] = useState('')
-  // const count = useRef(0)
-  const previousInputValue = useRef('')
+  const dispatch = useDispatch()
+  const {isAuthenticated, user} = useSelector((state)=>state.auth)
+  const theme = useSelector((state)=>state.theme.theme)
 
-  useEffect(()=>{
-    // count.current = count.current + 1
-    previousInputValue.current = inputValue
-  }, [inputValue])
+  const handleToggleTheme = () =>{
+    dispatch(toggleTheme())
+  }
+
+  const handleLogin = () =>{
+    const userData = {name:'John Doe', email:'john@gmail.com'}
+    dispatch(login(userData))
+  }
+
+  const handleLogout = () =>{
+    dispatch(logout())
+  }
+
+  const appStyle = {
+    backgroundColor: theme === 'light'?'#ffffff':'#333333',
+    color:theme === 'light'? '#000000': '#ffffff',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection:'column'
+  }
   return (
-    <>
-      <input type='text' value={inputValue} onChange={(e)=>setInputValue(e.target.value)}/>
-      <h1>Current Value: {inputValue}</h1>
-      <h2>Previous Value: {previousInputValue.current}</h2>
+   <Router>
+    <CartProvider>
+      <Navbar/>
+      <Routes>
+        <Route path='/' element={<ProductList/>}/>
+        <Route path='/cart' element={<Cart/>}/>
+      </Routes>
+    </CartProvider>
+    <hr/>
 
-      <hr/>
+    <div>
+      <h1>React Redux Authentication</h1>
+      {isAuthenticated?(
+        <div>
+          <h2>Welcome, {user.name}</h2>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ):(
+        <div>
+          <h2>Please Log In</h2>
+          <button onClick={handleLogin}>Log In</button>
+        </div>
+      )}
+    </div>
 
-      <Counter/>
-      <hr/>
-
-      <AuthProvider>
-        <h1>Simple Authentication System</h1>
-        <Login/>
-        <UserProfile/>
-      </AuthProvider>
-
-      <hr/>
-
-      <ThemeProvider>
-        <h1>Theme Toggle</h1>
-        <ThemeToggle/>
-      </ThemeProvider>
-
-      
-      <hr/>
-
-      <CounterProvider>
-        <h1>Counter with Context</h1>
-        <CounterDisplay/>
-      </CounterProvider>
-    </>
+    <hr/>
+    <div style={appStyle}>
+      <h1>{theme.charAt(0).toUpperCase() + theme.slice(1)}Theme</h1>
+      <button onClick={handleToggleTheme}>Switch to {theme==='light'?'Dark':'Light'} Theme</button>
+    </div>
+   </Router>
   )
 }
 
