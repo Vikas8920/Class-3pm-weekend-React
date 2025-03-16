@@ -5,10 +5,11 @@ import Navbar from './Component/Navbar'
 import ProductList from './Component/ProductList'
 import Cart from './Component/Cart'
 import { useDispatch, useSelector } from 'react-redux'
-import { login, logout, toggleTheme } from './Component/actions'
+import { decrement, increment, login, logout, toggleTheme } from './Component/actions'
 
 const App = () => {
   const dispatch = useDispatch()
+  const count = useSelector((state)=>state.counter.count)
   const {isAuthenticated, user} = useSelector((state)=>state.auth)
   const theme = useSelector((state)=>state.theme.theme)
 
@@ -64,6 +65,13 @@ const App = () => {
     <div style={appStyle}>
       <h1>{theme.charAt(0).toUpperCase() + theme.slice(1)}Theme</h1>
       <button onClick={handleToggleTheme}>Switch to {theme==='light'?'Dark':'Light'} Theme</button>
+    </div>
+
+    <hr/>
+    <div style={{textAlign:'center', marginTop: '50px'}}>
+      <h1>Counter: {count}</h1>
+      <button onClick={()=> dispatch(increment())}>Increment</button>
+      <button onClick={()=> dispatch(decrement())}>Decrement</button>
     </div>
    </Router>
   )
